@@ -1,4 +1,4 @@
-# ECK
+# Elastic Cloud on Kubernetes - ECK
 
 ECK (Elastic Cloud on Kubernetes) encompasses the Elasticsearch operator.
 
@@ -43,4 +43,22 @@ kubectl port-forward service/quickstart-es-http 9200
 3. Call the endpoint
 ```
 curl -u "elastic:<password>" -k "https://localhost:9200"
+```
+
+## Velero
+To setup and deploy Velero to the Kubernetes cluster refer to the [velero fabrikate definition](https://github.com/microsoft/fabrikate-definitions/tree/master/definitions/fabrikate-velero) instructions.
+
+Configure the `component.yaml` file to add the backup for elasticsearch:
+```
+schedules:
+  hourly-elasticsearch-backup:
+    schedule: "0 * * * *"
+    template:
+    includedNamespaces:
+    - "*"
+    labelSelector:
+        matchLabels:
+        namespace: "elasticsearch"
+    snapshotVolumes: true
+    ttl: "720h0m0s"
 ```
