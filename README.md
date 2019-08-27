@@ -32,12 +32,12 @@ You can verify the deployment succeeded by calling the elasticsearch API.
 1. Fetch the elasticsearch password
 
 ```
-kubectl get secret quickstart-es-elastic-user -o=jsonpath='{.data.elastic}' | base64 --decode
+kubectl -n elasticsearch get secret quickstart-es-elastic-user -o=jsonpath='{.data.elastic}' | base64 --decode
 ```
 
 2. Portforward
 ```
-kubectl port-forward service/quickstart-es-http 9200
+kubectl -n elasticsearch port-forward service/quickstart-es-http 9200
 ```
 
 3. Call the endpoint
