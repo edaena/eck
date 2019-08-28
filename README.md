@@ -45,6 +45,17 @@ kubectl -n elasticsearch port-forward service/quickstart-es-http 9200
 curl -u "elastic:<password>" -k "https://localhost:9200"
 ```
 
+### Run tests
+Port-forward to the service running in the Kubernetes cluster:
+```
+kubectl -n elasticsearch port-forward service/quickstart-es-http 9200
+```
+
+Run the tests [`elasticsearch-test.py`](/elasticsearch-test.py):
+```
+python elasticsearch-test.py
+```
+
 ## Velero
 To setup and deploy Velero to the Kubernetes cluster refer to the [velero fabrikate definition](https://github.com/microsoft/fabrikate-definitions/tree/master/definitions/fabrikate-velero) instructions.
 
